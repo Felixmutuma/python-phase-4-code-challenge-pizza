@@ -19,6 +19,9 @@ with app.app_context():
     bistro = Restaurant(name="Sanjay's Pizza", address='address2')
     palace = Restaurant(name="Kiki's Pizza", address='address3')
     restaurants = [shack, bistro, palace]
+    db.session.add_all(restaurants)
+    db.session.commit()
+    
 
     print("Creating pizzas...")
 
@@ -29,14 +32,18 @@ with app.app_context():
         name="Melanie", ingredients="Dough, Sauce, Ricotta, Red peppers, Mustard")
     pizzas = [cheese, pepperoni, california]
 
+    db.session.add_all(pizzas)
+    db.session.commit()
+
     print("Creating RestaurantPizza...")
 
     pr1 = RestaurantPizza(price=30,restaurant=shack, pizza=cheese)
     pr2 = RestaurantPizza(price=20,restaurant=bistro, pizza=pepperoni)
     pr3 = RestaurantPizza(price=24,restaurant=palace, pizza=california)
     restaurantPizzas = [pr1, pr2, pr3]
-    db.session.add_all(restaurants)
-    db.session.add_all(pizzas)
+    print(restaurantPizzas)
+
+
     db.session.add_all(restaurantPizzas)
     db.session.commit()
 
